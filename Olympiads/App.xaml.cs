@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -70,6 +71,10 @@ namespace Olympiads
                 }
                 // Обеспечение активности текущего окна
                 Window.Current.Activate();
+
+                SystemNavigationManager.GetForCurrentView().BackRequested += (s, args) => rootFrame.GoBack();                
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+
             }
         }
 

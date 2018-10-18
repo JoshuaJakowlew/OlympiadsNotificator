@@ -5,10 +5,52 @@
     xmlns:local="using:Olympiads"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:Olympiads"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="62*"/>
+        </Grid.ColumnDefinitions>
 
+        <CommandBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <AppBarButton Icon="Accept" Label="AppBarButton"/>
+            <AppBarButton Icon="Cancel" Label="AppBarButton"/>
+        </CommandBar>
+        
+        <ListView Grid.Column="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{x:Bind OlympiadList}"/>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Padding="10">
+            <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Button Content="Save" Tapped="Button_Tapped" />
+                <Button Content="Load" Tapped="Button_Tapped_1" />
+
+                <TextBlock Text="{x:Bind CurrentOlympiad.Name}" TextWrapping="Wrap" FontSize="24" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Tapped="Link_Tapped"  Margin="0 10" Content="Перейти" />
+                    <Button Tapped="ExtrenalLink_Tapped" Margin="10" Content="Перейти в браузере" />
+                </StackPanel>
+                <TextBlock Text="Профили:" TextWrapping="Wrap" FontSize="20" />
+                
+                <GridView ItemsSource="{x:Bind CurrentOlympiad.Profiles}" FontSize="16" >
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="data:Profile">
+                            <TextBlock Text="{x:Bind Name}" TextWrapping="Wrap" />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+                
+                <!--<TextBlock Text="{x:Bind CurrentOlympiad.ProfileDisplay}" TextWrapping="Wrap" />-->
+                <TextBlock Text="{x:Bind CurrentOlympiad.Year}" TextWrapping="Wrap" />
+                <TextBlock Text="{x:Bind CurrentOlympiad.Level}" TextWrapping="Wrap" />
+                <TextBlock Text="{x:Bind CurrentOlympiad.Name}" TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
